@@ -1,20 +1,14 @@
-import React, { useEffect } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
 } from "react-router-dom";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
-import { useDispatch } from "react-redux";
-import { fetchAllProductsAsync } from "./features/product/productSlice";
 const router = createBrowserRouter([
   {
     path: "/",
