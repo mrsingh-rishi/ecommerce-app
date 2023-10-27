@@ -2,18 +2,18 @@ import "./App.css";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import Protected from "./features/auth/components/Protected";
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Home></Home>
+      <Protected>
+        <Home></Home>
+      </Protected>
     ),
   },
   {
@@ -27,25 +27,30 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: (
-      <CartPage></CartPage>
+      <Protected>
+        <CartPage></CartPage>
+      </Protected>
     ),
   },
   {
     path: "/checkout",
     element: (
-      <CheckoutPage></CheckoutPage>
+      <Protected>
+        <CheckoutPage></CheckoutPage>
+      </Protected>
     ),
   },
   {
     path: "/product-detail/:id",
     element: (
-      <ProductDetailPage></ProductDetailPage>
+      <Protected>
+        <ProductDetailPage></ProductDetailPage>{" "}
+      </Protected>
     ),
   },
 ]);
 
 function App() {
-  
   return (
     <div className="App">
       <RouterProvider router={router} />
