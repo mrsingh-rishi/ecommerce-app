@@ -7,10 +7,13 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Protected from "./features/auth/components/Protected";
+import UserOrdersPage from "./pages/UserOrdersPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 import { selectLoggedInUser } from "./features/auth/authSlice";
+import PageNorFound from "./pages/404";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +40,14 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/orders",
+    element: (
+      <Protected>
+        <UserOrdersPage></UserOrdersPage>
+      </Protected>
+    ),
+  },
+  {
     path: "/checkout",
     element: (
       <Protected>
@@ -50,6 +61,18 @@ const router = createBrowserRouter([
       <Protected>
         <ProductDetailPage></ProductDetailPage>{" "}
       </Protected>
+    ),
+  },
+  {
+    path: "/order-success/:id",
+    element: (
+        <OrderSuccessPage></OrderSuccessPage>
+    ),
+  },
+  {
+    path: "*",
+    element: (
+      <PageNorFound></PageNorFound>
     ),
   },
 ]);

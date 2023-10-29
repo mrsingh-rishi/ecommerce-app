@@ -13,6 +13,18 @@ export function createUser(userData) {
   });
 }
 
+export function updateUser(userData) {
+  return new Promise(async (resolve) => {
+    const response = await fetch("http://localhost:8080/users/"+userData.id, {
+      method: "PATCH",
+      body: JSON.stringify(userData),
+      headers: { "content-type": "application/json" },
+    });
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
 export function checkUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     const email = loginInfo.email;
