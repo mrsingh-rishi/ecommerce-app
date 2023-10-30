@@ -1,6 +1,4 @@
-import { isRejected } from "@reduxjs/toolkit";
 
-// A mock function to mimic making an async request for data
 export function createUser(userData) {
   return new Promise(async (resolve) => {
     const response = await fetch("http://localhost:8080/users", {
@@ -43,4 +41,11 @@ export function checkUser(loginInfo) {
     }
     resolve({ data });
   });
+}
+
+export function signOut() {
+  return new Promise(async (resolve) =>{
+    resolve({data: 'success'});
+  }
+  );
 }

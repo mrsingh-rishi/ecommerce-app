@@ -23,7 +23,6 @@ const CheckoutPage = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
   } = useForm();
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState("cash");
@@ -43,7 +42,7 @@ const CheckoutPage = () => {
   const totalItems = products.reduce((total, item) => item.quantity + total, 0);
 
   const handleQuantity = (quantity, item) => {
-    if (quantity == 0) {
+    if (quantity === 0) {
       handleRemove(item.id);
     } else if (quantity < 0) {
       return;

@@ -14,6 +14,9 @@ import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
 import { selectLoggedInUser } from "./features/auth/authSlice";
 import PageNorFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import UserProfilePage from "./pages/UserProfilePage";
+import Logout from "./features/auth/components/Logout";
+import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +39,14 @@ const router = createBrowserRouter([
     element: (
       <Protected>
         <CartPage></CartPage>
+      </Protected>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <Protected>
+        <UserProfilePage></UserProfilePage>
       </Protected>
     ),
   },
@@ -64,6 +75,18 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/logout",
+    element: (
+      <Logout></Logout>
+    ),
+  },
+  {
+    path: "/forget-password",
+    element: (
+      <ForgetPasswordPage></ForgetPasswordPage>
+    ),
+  },
+  {
     path: "/order-success/:id",
     element: (
         <OrderSuccessPage></OrderSuccessPage>
@@ -85,6 +108,8 @@ function App() {
       dispatch(fetchItemsByUserIdAsync(user.id));
     }
   }, [dispatch, user])
+
+  console.log({user});
   return (
     <div className="App">
       <RouterProvider router={router} />

@@ -2088,26 +2088,17 @@
         {
           "name": "Rishi",
           "email": "rs3949427@gmail.com",
-          "phone": "07017025022",
-          "street": "Krishna Nagar",
           "city": "Mathura",
           "state": "UTTAR PRADESH",
-          "pinCode": "281004"
+          "pinCode": "281004",
+          "phone": "7017025022",
+          "street": "159-D Krishna Nagar"
         },
         {
-          "name": "Rishi",
-          "email": "rishisingh.2020@glbajajgroup.org",
-          "phone": "12387893",
-          "street": "adajjdnakm",
-          "city": "Mathura",
-          "state": "UTTAR PRADESH",
-          "pinCode": "281004"
-        },
-        {
-          "name": "Rishi SIngh",
+          "name": "Rishi Singh",
           "email": "rs3949427@gmail.com",
-          "phone": "07017025022",
-          "street": "Pata Nahi",
+          "phone": "7017025022",
+          "street": "159-D Krishna Nagar, Mathura",
           "city": "Mathura",
           "state": "UTTAR PRADESH",
           "pinCode": "281004"
@@ -2199,6 +2190,44 @@
       },
       "status": "pending",
       "id": 2
+    },
+    {
+      "products": [
+        {
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": 1749,
+          "discountPercentage": 11.02,
+          "rating": 4.57,
+          "stock": 83,
+          "brand": "Apple",
+          "category": "laptops",
+          "thumbnail": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+          "images": [
+            "https://i.dummyjson.com/data/products/6/1.png",
+            "https://i.dummyjson.com/data/products/6/2.jpg",
+            "https://i.dummyjson.com/data/products/6/3.png",
+            "https://i.dummyjson.com/data/products/6/4.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmountDiscounted": 1556,
+      "totalItems": 1,
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Rishi",
+        "email": "rs3949427@gmail.com",
+        "phone": "07017025022",
+        "street": "159-D Krishna Nagar",
+        "city": "Mathura",
+        "state": "UTTAR PRADESH",
+        "pinCode": "281004"
+      },
+      "status": "pending",
+      "id": 3
     }
   ]
 }
