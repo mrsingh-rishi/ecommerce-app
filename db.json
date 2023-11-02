@@ -1838,6 +1838,24 @@
         "https://i.dummyjson.com/data/products/100/3.jpg",
         "https://i.dummyjson.com/data/products/100/thumbnail.jpg"
       ]
+    },
+    {
+      "title": "iPhone 15",
+      "description": "As part of our efforts to reach carbon neutrality by 2030, iPhone 15 and iPhone 15 Plus do not include a power adapter or EarPods. Included in the box is a USB‑C Charge Cable that supports fast charging and is compatible with USB‑C power adapters and computer ports.\n\nWe encourage you to use any compatible USB‑C power adapter. If you need a new Apple power adapter or headphones, they are available for purchase.",
+      "brand": "Apple",
+      "category": "smartphones",
+      "price": 960,
+      "discountPercentage": 12,
+      "stock": 3,
+      "thumbnail": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-storage-select-202309-6-1inch-black?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692924212672",
+      "images": [
+        "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692923777972",
+        "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-pink?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692923780378",
+        "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-yellow?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692923780785",
+        "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-storage-select-202309-6-1inch-black?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692924212672"
+      ],
+      "rating": 0,
+      "id": 101
     }
   ],
   "brands": [
@@ -2103,13 +2121,15 @@
           "state": "UTTAR PRADESH",
           "pinCode": "281004"
         }
-      ]
+      ],
+      "role": "user"
     },
     {
       "email": "rishisingh.2020@glbajajgroup.org",
       "password": "Qwerty@1234",
       "id": 2,
-      "addresses": []
+      "addresses": [],
+      "role": "admin"
     }
   ],
   "cart": [],
@@ -2228,6 +2248,44 @@
       },
       "status": "pending",
       "id": 3
+    },
+    {
+      "products": [
+        {
+          "title": "iPhone 15",
+          "description": "As part of our efforts to reach carbon neutrality by 2030, iPhone 15 and iPhone 15 Plus do not include a power adapter or EarPods. Included in the box is a USB‑C Charge Cable that supports fast charging and is compatible with USB‑C power adapters and computer ports.\n\nWe encourage you to use any compatible USB‑C power adapter. If you need a new Apple power adapter or headphones, they are available for purchase.",
+          "brand": "Apple",
+          "category": "smartphones",
+          "price": 960,
+          "discountPercentage": 12,
+          "stock": 3,
+          "thumbnail": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-storage-select-202309-6-1inch-black?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692924212672",
+          "images": [
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692923777972",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-pink?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692923780378",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-yellow?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692923780785",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-storage-select-202309-6-1inch-black?wid=2560&hei=1440&fmt=p-jpg&qlt=80&.v=1692924212672"
+          ],
+          "rating": 0,
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmountDiscounted": 845,
+      "totalItems": 1,
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "Rishi",
+        "email": "rs3949427@gmail.com",
+        "city": "Mathura",
+        "state": "UTTAR PRADESH",
+        "pinCode": "281004",
+        "phone": "7017025022",
+        "street": "159-D Krishna Nagar"
+      },
+      "status": "pending",
+      "id": 4
     }
   ]
 }

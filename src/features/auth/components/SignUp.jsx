@@ -14,7 +14,7 @@ export default function SignUp() {
   const user = useSelector(selectLoggedInUser);
   return (
     <>
-    {user && <Navigate to='/' replace={true}></Navigate> }
+      {user && <Navigate to="/" replace={true}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -33,7 +33,12 @@ export default function SignUp() {
             noValidate
             onSubmit={handleSubmit((data) =>
               dispatch(
-                createUserAsync({ email: data.email, password: data.password, addresses: [] })
+                createUserAsync({
+                  email: data.email,
+                  password: data.password,
+                  addresses: [],
+                  role: 'user'
+                })
               )
             )}
           >
