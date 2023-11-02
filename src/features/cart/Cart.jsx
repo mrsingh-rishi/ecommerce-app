@@ -4,6 +4,8 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteItemAsync, selectItems, updateCartAsync } from "./cartSlice";
+import { discountedPrice } from '../../app/constants';
+
 
 export default function Cart() {
   const [open, setOpen] = useState(true);
@@ -17,7 +19,7 @@ export default function Cart() {
     0
   );
   const totalAmount = products.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => discountedPrice(item) * item.quantity + amount,
     0
   );
 
@@ -66,10 +68,7 @@ export default function Cart() {
                           </h3>
                           <p className="ml-4 inline">
                             $
-                            {Math.round(
-                              product.price *
-                                (1 - product.discountPercentage / 100)
-                            )}{" "}
+                            {discountedPrice(product)}{" "}
                             <span className="text-red-500 line-through">
                               ${product.price}
                             </span>

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedInUser } from "../../auth/authSlice";
 import { fetchLoggedInUserOrdersAsync, selectUserOrders } from "../userSlice";
+import { discountedPrice } from "../../../app/constants";
 
 export default function UserOrders() {
   const dispatch = useDispatch();
@@ -40,13 +41,7 @@ export default function UserOrders() {
                             <h3>
                               <a href={product.href}>{product.title}</a>
                             </h3>
-                            <p className="ml-4 inline">
-                              $
-                              {Math.round(
-                                product.price *
-                                  (1 - product.discountPercentage / 100)
-                              )}{" "}
-                            </p>
+                            <p className="ml-4">${discountedPrice(product)}</p>
                           </div>
                         </div>
                         <div className="flex flex-1 items-end justify-between text-sm">
@@ -104,7 +99,9 @@ export default function UserOrders() {
                 <p className="text-sm leading-6 text-gray-900">
                   Phone: {order.selectedAddress.phone}
                 </p>
-                <p className="text-sm leading-6 text-gray-500">{order.selectedAddress.city}</p>
+                <p className="text-sm leading-6 text-gray-500">
+                  {order.selectedAddress.city}
+                </p>
               </div>
             </div>
           </div>
