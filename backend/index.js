@@ -2,10 +2,27 @@ const express = require("express");
 const server = express();
 const mongoose = require("mongoose");
 const productsRouter = require('./routes/Product');
+const categoriesRouter = require('./routes/Category');
+const brandRouters = require('./routes/Brand');
+const userRouters = require('./routes/User');
+const authRouters = require('./routes/Auth');
+
+const cors = require('cors');
 // Middlewares
 
+server.use(cors({
+  exposedHeaders: ['X-Total-Count']
+}));
 server.use(express.json());
 server.use('/products', productsRouter.router);
+server.use('/categories', categoriesRouter.router);
+server.use('/brands', brandRouters.router);
+server.use('/users', userRouters.router);
+server.use('/auth', authRouters.router);
+
+
+
+// DB Connection
 main().catch((error) => console.log(error));
 // Main ULR
 // `mongodb+srv://rishi:rishi2002@cluster0.ualyzwa.mongodb.net/ecommerce`
