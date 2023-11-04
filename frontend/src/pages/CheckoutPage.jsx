@@ -28,7 +28,7 @@ const CheckoutPage = () => {
   const [paymentMethod, setPaymentMethod] = useState("cash");
 
   const totalAmountDiscounted = products.reduce(
-    (amount, item) => discountedPrice(item) * item.quantity + amount,
+    (amount, item) => discountedPrice(item.product) * item.quantity + amount,
     0
   );
   const totalAmount = products.reduce(
@@ -44,7 +44,7 @@ const CheckoutPage = () => {
     } else if (quantity < 0) {
       return;
     } else {
-      const updatedItem = { ...item, quantity: +quantity };
+      const updatedItem = { id: item.id, quantity: +quantity };
       dispatch(updateCartAsync(updatedItem));
       reset();
     }
@@ -376,8 +376,8 @@ const CheckoutPage = () => {
                         <li key={product.id} className="flex py-6">
                           <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                             <img
-                              src={product.thumbnail}
-                              alt={product.imageAlt}
+                              src={product.product.thumbnail}
+                              alt={product.product.title}
                               className="h-full w-full object-cover object-center"
                             />
                           </div>
@@ -386,17 +386,17 @@ const CheckoutPage = () => {
                             <div>
                               <div className="flex justify-between text-base font-medium text-gray-900">
                                 <h3>
-                                  <a href={product.href}>{product.title}</a>
+                                  <a href={product.product.href}>{product.product.title}</a>
                                 </h3>
                                 <p className="ml-4 inline">
-                                  ${discountedPrice(product)}
+                                  ${discountedPrice(product.product)}
                                   <span className="text-red-500 line-through">
-                                    ${product.price}
+                                    ${product.product.price}
                                   </span>
                                 </p>
                               </div>
                               <p className="mt-1 text-sm text-gray-500">
-                                {product.color}
+                                {product.product.color}
                               </p>
                             </div>
                             <div className="flex flex-1 items-end justify-between text-sm">
@@ -436,7 +436,7 @@ const CheckoutPage = () => {
 
                               <div className="flex">
                                 <button
-                                  onClick={() => handleRemove(product.id)}
+                                  onClick={() => handleRemove(product.product.id)}
                                   type="button"
                                   className="font-medium text-indigo-600 hover:text-indigo-500"
                                 >

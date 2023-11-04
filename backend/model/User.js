@@ -8,7 +8,7 @@ const userSchema = new Schema({
   role: {
     type: String,
     require: true,
-    default: 'user'
+    default: "user",
   },
   addresses: {
     type: [Schema.Types.Mixed],

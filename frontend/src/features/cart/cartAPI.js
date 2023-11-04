@@ -25,7 +25,7 @@ export function updateItem(item) {
 
 export function fetchItemsByUserId(id){
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/cart?user='+id);
+    const response = await fetch('http://localhost:8080/cart/'+id);
     const data = await response.json();
     resolve({ data });
   });
@@ -33,7 +33,8 @@ export function fetchItemsByUserId(id){
 
 export function deleteItem(id){
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/cart/"+id, {
+    const newId = id;
+    const response = await fetch("http://localhost:8080/cart/"+newId, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     });

@@ -4,22 +4,18 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteItemAsync, selectItems, updateCartAsync } from "./cartSlice";
-import { discountedPrice } from '../../app/constants';
-
+import { discountedPrice } from "../../app/constants";
 
 export default function Cart() {
   const [open, setOpen] = useState(true);
   const dispatch = useDispatch();
   const products = useSelector(selectItems);
   const totalAmountDiscounted = products.reduce(
-    (amount, item) =>
-      Math.round(item.price * (1 - item.discountPercentage / 100)) *
-        item.quantity +
-      amount,
+    (amount, item) => discountedPrice(item.product) * item.quantity + amount,
     0
   );
   const totalAmount = products.reduce(
-    (amount, item) => discountedPrice(item) * item.quantity + amount,
+    (amount, item) => item.product.price * item.quantity + amount,
     0
   );
 
@@ -31,14 +27,15 @@ export default function Cart() {
     } else if (quantity < 0) {
       return;
     } else {
-      const updatedItem = { ...item, quantity: +quantity };
+      const updatedItem = { if: item.id, quantity: +quantity };
       dispatch(updateCartAsync(updatedItem));
     }
   };
 
   const handleRemove = (id) => {
-    dispatch(deleteItemAsync(+id));
-  }
+    console.log(id);
+    dispatch(deleteItemAsync(id));
+  };
   return (
     <>
       <div className="mx-auto mt-12 max-w-3xl px-4 sm:px-6 lg:px-8 bg-white">
@@ -46,16 +43,16 @@ export default function Cart() {
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">
             Cart
           </h1>
-          
-            <div className="flow-root mt-8">
+
+          <div className="flow-root mt-8">
             {totalItems > 0 ? (
               <ul role="list" className="-my-6 divide-y divide-gray-200">
                 {products.map((product) => (
-                  <li key={product.id} className="flex py-6">
+                  <li key={product.product.id} className="flex py-6">
                     <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                       <img
-                        src={product.thumbnail}
-                        alt={product.imageAlt}
+                        src={product.product.thumbnail}
+                        alt={product.product.title}
                         className="h-full w-full object-cover object-center"
                       />
                     </div>
@@ -64,18 +61,19 @@ export default function Cart() {
                       <div>
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <h3>
-                            <a href={product.href}>{product.title}</a>
+                            <a href={product.product.href}>
+                              {product.product.title}
+                            </a>
                           </h3>
                           <p className="ml-4 inline">
-                            $
-                            {discountedPrice(product)}{" "}
+                            ${discountedPrice(product.product)}{" "}
                             <span className="text-red-500 line-through">
-                              ${product.price}
+                              ${product.product.price}
                             </span>
                           </p>
                         </div>
                         <p className="mt-1 text-sm text-gray-500">
-                          {product.color}
+                          {product.product.color}
                         </p>
                       </div>
                       <div className="flex flex-1 items-end justify-between text-sm">
@@ -87,7 +85,10 @@ export default function Cart() {
                             Qty :{" "}
                             <div
                               onClick={(e) =>
-                                handleQuantity(product.quantity - 1, product)
+                                handleQuantity(
+                                  product.quantity - 1,
+                                  product.product
+                                )
                               }
                               className="relative cursor-pointer inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
@@ -98,7 +99,10 @@ export default function Cart() {
                             </div>
                             <div
                               onClick={(e) =>
-                                handleQuantity(product.quantity + 1, product)
+                                handleQuantity(
+                                  product.quantity + 1,
+                                  product.product
+                                )
                               }
                               className="relative cursor-pointer ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
@@ -109,7 +113,7 @@ export default function Cart() {
 
                         <div className="flex">
                           <button
-                            onClick={()=>handleRemove(product.id)}
+                            onClick={() => handleRemove(product.product.id)}
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >
@@ -121,12 +125,12 @@ export default function Cart() {
                   </li>
                 ))}
               </ul>
-              ) : (
-                <h1 className="text-2xl flex justify-center font-bold tracking-tight text-gray-900">
-                  Your Cart is Empty
-                </h1> )}
-            </div>
-          
+            ) : (
+              <h1 className="text-2xl flex justify-center font-bold tracking-tight text-gray-900">
+                Your Cart is Empty
+              </h1>
+            )}
+          </div>
         </div>
 
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">

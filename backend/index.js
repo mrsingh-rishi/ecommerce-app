@@ -6,6 +6,8 @@ const categoriesRouter = require('./routes/Category');
 const brandRouters = require('./routes/Brand');
 const userRouters = require('./routes/User');
 const authRouters = require('./routes/Auth');
+const cartRouters = require('./routes/Cart');
+
 
 const cors = require('cors');
 // Middlewares
@@ -19,6 +21,8 @@ server.use('/categories', categoriesRouter.router);
 server.use('/brands', brandRouters.router);
 server.use('/users', userRouters.router);
 server.use('/auth', authRouters.router);
+server.use('/cart', cartRouters.router);
+
 
 
 

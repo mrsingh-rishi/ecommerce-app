@@ -17,12 +17,11 @@ import OrderSuccessPage from "./pages/OrderSuccessPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import Logout from "./features/auth/components/Logout";
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
-import ProtectedAdmin from './features/auth/components/ProtectedAdmin';
-import AdminHome from './pages/AdminHome';
-import AdminProductDetailPage from './pages/AdminProductDetailPage';
-import AdminProductFormPage from './pages/AdminProductFormPage';
-import AdminOrdersPage from './pages/AdminOrdersPage';
-
+import ProtectedAdmin from "./features/auth/components/ProtectedAdmin";
+import AdminHome from "./pages/AdminHome";
+import AdminProductDetailPage from "./pages/AdminProductDetailPage";
+import AdminProductFormPage from "./pages/AdminProductFormPage";
+import AdminOrdersPage from "./pages/AdminOrdersPage";
 
 const router = createBrowserRouter([
   {
@@ -90,7 +89,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/admin/product-detail/:id',
+    path: "/admin/product-detail/:id",
     element: (
       <ProtectedAdmin>
         <AdminProductDetailPage></AdminProductDetailPage>
@@ -98,7 +97,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/admin/product-form',
+    path: "/admin/product-form",
     element: (
       <ProtectedAdmin>
         <AdminProductFormPage></AdminProductFormPage>
@@ -106,7 +105,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/admin/product-form/edit/:id',
+    path: "/admin/product-form/edit/:id",
     element: (
       <ProtectedAdmin>
         <AdminProductFormPage></AdminProductFormPage>
@@ -114,7 +113,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/admin/orders',
+    path: "/admin/orders",
     element: (
       <ProtectedAdmin>
         <AdminOrdersPage></AdminOrdersPage>
@@ -123,27 +122,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/logout",
-    element: (
-      <Logout></Logout>
-    ),
+    element: <Logout></Logout>,
   },
   {
     path: "/forget-password",
-    element: (
-      <ForgetPasswordPage></ForgetPasswordPage>
-    ),
+    element: <ForgetPasswordPage></ForgetPasswordPage>,
   },
   {
     path: "/order-success/:id",
-    element: (
-        <OrderSuccessPage></OrderSuccessPage>
-    ),
+    element: <OrderSuccessPage></OrderSuccessPage>,
   },
   {
     path: "*",
-    element: (
-      <PageNorFound></PageNorFound>
-    ),
+    element: <PageNorFound></PageNorFound>,
   },
 ]);
 
@@ -151,12 +142,11 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
   useEffect(() => {
-    if(user){
+    if (user) {
       dispatch(fetchItemsByUserIdAsync(user.id));
     }
-  }, [dispatch, user])
+  }, [dispatch, user]);
 
-  console.log({user});
   return (
     <div className="App">
       <RouterProvider router={router} />

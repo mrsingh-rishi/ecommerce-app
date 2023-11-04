@@ -7,7 +7,6 @@ export default function Login() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
   const error = useSelector(selectError);
-  // console.log(error)
   const {
     register,
     handleSubmit,
