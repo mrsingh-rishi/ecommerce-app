@@ -22,18 +22,19 @@ export default function Cart() {
   const totalItems = products.reduce((total, item) => item.quantity + total, 0);
 
   const handleQuantity = (quantity, item) => {
-    if (quantity == 0) {
-      handleRemove(item.id);
-    } else if (quantity < 0) {
-      return;
+    if (quantity <= 0) {
+      handleRemove(item.product.id);
     } else {
-      const updatedItem = { if: item.id, quantity: +quantity };
+      const updatedItem = {
+        id: item.id,
+        quantity: quantity,
+      };
+      // console.log(updatedItem);
       dispatch(updateCartAsync(updatedItem));
     }
   };
 
   const handleRemove = (id) => {
-    console.log(id);
     dispatch(deleteItemAsync(id));
   };
   return (
@@ -85,10 +86,7 @@ export default function Cart() {
                             Qty :{" "}
                             <div
                               onClick={(e) =>
-                                handleQuantity(
-                                  product.quantity - 1,
-                                  product.product
-                                )
+                                handleQuantity(product.quantity - 1, product)
                               }
                               className="relative cursor-pointer inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
@@ -99,10 +97,7 @@ export default function Cart() {
                             </div>
                             <div
                               onClick={(e) =>
-                                handleQuantity(
-                                  product.quantity + 1,
-                                  product.product
-                                )
+                                handleQuantity(product.quantity + 1, product)
                               }
                               className="relative cursor-pointer ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >

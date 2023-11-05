@@ -9,9 +9,9 @@ const initialState = {
 };
 export const createOrderAsync = createAsyncThunk(
   "order/createOrder",
-  async (amount) => {
-    const response = await createOrder(amount);
-
+  async (order) => {
+    const response = await createOrder(order);
+    console.log(response.data);
     return response.data;
   }
 );

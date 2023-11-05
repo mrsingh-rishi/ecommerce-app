@@ -7,6 +7,8 @@ const brandRouters = require('./routes/Brand');
 const userRouters = require('./routes/User');
 const authRouters = require('./routes/Auth');
 const cartRouters = require('./routes/Cart');
+const orderRouters = require('./routes/Order');
+
 
 
 const cors = require('cors');
@@ -22,6 +24,8 @@ server.use('/brands', brandRouters.router);
 server.use('/users', userRouters.router);
 server.use('/auth', authRouters.router);
 server.use('/cart', cartRouters.router);
+server.use('/orders', orderRouters.router);
+
 
 
 

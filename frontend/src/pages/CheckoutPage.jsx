@@ -32,7 +32,7 @@ const CheckoutPage = () => {
     0
   );
   const totalAmount = products.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => item.product.price * item.quantity + amount,
     0
   );
 
@@ -68,9 +68,10 @@ const CheckoutPage = () => {
 
   const handleOrder = (e) => {
     const order = {
-      products,
-      totalAmountDiscounted,
+      items: products,
+      totalAmount: totalAmountDiscounted,
       totalItems,
+      user: user.id,
       paymentMethod,
       selectedAddress,
       status: "pending",
@@ -386,7 +387,9 @@ const CheckoutPage = () => {
                             <div>
                               <div className="flex justify-between text-base font-medium text-gray-900">
                                 <h3>
-                                  <a href={product.product.href}>{product.product.title}</a>
+                                  <a href={product.product.href}>
+                                    {product.product.title}
+                                  </a>
                                 </h3>
                                 <p className="ml-4 inline">
                                   ${discountedPrice(product.product)}
@@ -436,7 +439,9 @@ const CheckoutPage = () => {
 
                               <div className="flex">
                                 <button
-                                  onClick={() => handleRemove(product.product.id)}
+                                  onClick={() =>
+                                    handleRemove(product.product.id)
+                                  }
                                   type="button"
                                   className="font-medium text-indigo-600 hover:text-indigo-500"
                                 >

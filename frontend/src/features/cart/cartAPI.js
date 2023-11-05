@@ -13,7 +13,7 @@ export function addToCart(item) {
 
 export function updateItem(item) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/cart/"+item.id, {
+    const response = await fetch("http://localhost:8080/cart/" + item.id, {
       method: "PATCH",
       body: JSON.stringify(item),
       headers: { "content-type": "application/json" },
@@ -23,35 +23,34 @@ export function updateItem(item) {
   });
 }
 
-export function fetchItemsByUserId(id){
+export function fetchItemsByUserId(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/cart/'+id);
+    const response = await fetch("http://localhost:8080/cart/" + id);
     const data = await response.json();
     resolve({ data });
   });
 }
 
-export function deleteItem(id){
+export function deleteItem(id) {
   return new Promise(async (resolve) => {
     const newId = id;
-    const response = await fetch("http://localhost:8080/cart/"+newId, {
+    const response = await fetch("http://localhost:8080/cart/" + newId, {
       method: "DELETE",
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-    resolve({ data:{id:id} });
+    resolve({ data: { id: id } });
   });
 }
 
-export function resetCart(userId){
+export function resetCart(id) {
   return new Promise(async (resolve) => {
-    const response = await fetchItemsByUserId(userId);
+    const response = await fetchItemsByUserId(id);
     const items = response.data;
-    for(let item of items){
-      const itemId = +item.id
-      console.log(itemId);
-      await deleteItem(itemId);
+    // console.log(items);
+    for (let item of items) {
+      await deleteItem(item.product.id);
     }
-    resolve({status: 'success'});
+    resolve({ status: "success" });
   });
 }

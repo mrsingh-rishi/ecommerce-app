@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedInUser, updateUserAsync } from "../../auth/authSlice";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function UserProfile() {
   const [selectedEditIndex, setSelectedEditIndex] = useState(-1);
@@ -30,20 +30,20 @@ export default function UserProfile() {
   const handleEditForm = (index) => {
     setSelectedEditIndex(index);
     const address = user.addresses[index];
-    setValue('name', address.name);
-    setValue('email', address.email);
-    setValue('city', address.city);
-    setValue('state', address.state);
-    setValue('pinCode', address.pinCode);
-    setValue('phone', address.phone);
-    setValue('street', address.street);
+    setValue("name", address.name);
+    setValue("email", address.email);
+    setValue("city", address.city);
+    setValue("state", address.state);
+    setValue("pinCode", address.pinCode);
+    setValue("phone", address.phone);
+    setValue("street", address.street);
   };
 
-  const handleAdd = (address)=>{
-    const newUser = { ...user, addresses: [...user.addresses, address] }; 
+  const handleAdd = (address) => {
+    const newUser = { ...user, addresses: [...user.addresses, address] };
     dispatch(updateUserAsync(newUser));
     setShowAddAddressForm(false);
-  }
+  };
   return (
     <div>
       <div className="mx-auto mt-12 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -72,7 +72,7 @@ export default function UserProfile() {
               className="bg-white px-5 py-12 mt-12"
               noValidate
               onSubmit={handleSubmit((data) => {
-                console.log(data);
+                // console.log(data);
                 handleAdd(data);
                 reset();
               })}

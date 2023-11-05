@@ -11,8 +11,9 @@ import { selectLoggedInUser } from "../auth/authSlice";
 import { selectItems } from "../cart/cartSlice";
 
 const navigation = [
+  { name: "Home", link: "/", user: true },
   { name: "Products", link: "/admin", admin: true },
-  { name: 'Orders', link: '/admin/orders', admin: true },
+  { name: "Orders", link: "/admin/orders", admin: true },
 ];
 const userNavigation = [
   { name: "My Profile", link: "/profile" },
@@ -46,10 +47,10 @@ const Navbar = ({ children }) => {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) =>
+                        {navigation.map((item, index) =>
                           item[user.role] ? (
                             <Link
-                              key={item.name}
+                              key={index}
                               to={item.link}
                               className={classNames(
                                 item.current
