@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
   email: { type: String, require: true, unique: true },
-  password: { type: String, require: true },
+  password: { type: Buffer, require: true },
   role: {
     type: String,
     require: true,
@@ -17,6 +17,7 @@ const userSchema = new Schema({
   orders: {
     type: [Schema.Types.Mixed],
   },
+  salt: Buffer
 });
 
 const virtual = userSchema.virtual("id");
