@@ -1,7 +1,7 @@
 const { User } = require("../model/User");
 
 exports.fetchUserById = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.user;
   try {
     const user = await User.findById(id, "name email id addresses orders");
     res.status(200).json(user);
@@ -11,9 +11,9 @@ exports.fetchUserById = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.user;
   try {
-    const user = await User.findByIdAndUpdate(id, req.body, {new: true});
+    const user = await User.findByIdAndUpdate(id, req.body, { new: true });
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json(error);

@@ -12,7 +12,7 @@ export function createUser(userData) {
 
 export function updateUser(userData) {
   return new Promise(async (resolve) => {
-    const response = await fetch("http://localhost:8080/users/" + userData.id, {
+    const response = await fetch("http://localhost:8080/users", {
       method: "PATCH",
       body: JSON.stringify(userData),
       headers: { "content-type": "application/json" },
@@ -21,6 +21,15 @@ export function updateUser(userData) {
     resolve({ data });
   });
 }
+
+export function fetchUserInfo() {
+  return new Promise(async (resolve) => {
+    const response = await fetch(`http://localhost:8080/auth/check`);
+    const data = await response.json();
+    resolve({ data });
+  });
+}
+
 
 export function checkUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
@@ -31,8 +40,9 @@ export function checkUser(loginInfo) {
         headers: { "content-type": "application/json" },
       });
       if (response.ok) {
+        const userInfo = await fetchUserInfo()
         const data = await response.json();
-        resolve({ data });
+        resolve({ data: {data, userInfo}});
       }
       else{
         const error = await response.json();

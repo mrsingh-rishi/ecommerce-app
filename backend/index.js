@@ -14,18 +14,25 @@ const cors = require("cors");
 const { User } = require("./model/User");
 const LocalStrategy = require("passport-local").Strategy;
 const crypto = require("crypto");
-const { isAuth, santizeUser } = require("./services/common");
+const { isAuth, santizeUser, cookieExtractor } = require("./services/common");
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
+const cookieParser = require("cookie-parser");
+// KEY
 
 const SECRET_KEY = "SECRET_KEY";
+
 // JWT Options
 
 const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = SECRET_KEY;
 // Middlewares
+
+server.use(express.static("build"));
+server.use(cookieParser());
+
 server.use(
   session({
     secret: "keyboard cat",
@@ -33,7 +40,6 @@ server.use(
     saveUninitialized: false,
   })
 );
-
 server.use(passport.authenticate("session"));
 server.use(
   cors({
@@ -53,9 +59,11 @@ server.use("/orders", isAuth(), orderRouters.router);
 
 passport.use(
   "local",
-  new LocalStrategy(
-    {usernameField: 'email'},
-    async function (email, password, done) {
+  new LocalStrategy({ usernameField: "email" }, async function (
+    email,
+    password,
+    done
+  ) {
     // by default passport uses username
     try {
       const user = await User.findOne({ email: email });
@@ -74,7 +82,7 @@ passport.use(
             return done(null, false, { message: "invalid credentials" });
           }
           const token = jwt.sign(santizeUser(user), SECRET_KEY);
-          done(null, token); // this lines sends to serializer
+          done(null, { token }); // this lines sends to serializer
         }
       );
     } catch (err) {

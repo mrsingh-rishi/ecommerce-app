@@ -11,7 +11,7 @@ import UserOrdersPage from "./pages/UserOrdersPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
-import { selectLoggedInUser } from "./features/auth/authSlice";
+import { fetchUserInfoAsync, selectUserInfo } from "./features/auth/authSlice";
 import PageNorFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import UserProfilePage from "./pages/UserProfilePage";
@@ -140,10 +140,10 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
   useEffect(() => {
     if (user) {
-      dispatch(fetchItemsByUserIdAsync(user.id));
+      dispatch(fetchItemsByUserIdAsync());
     }
   }, [dispatch, user]);
 

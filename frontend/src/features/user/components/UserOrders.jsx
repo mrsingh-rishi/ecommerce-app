@@ -1,20 +1,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectLoggedInUser } from "../../auth/authSlice";
 import { fetchLoggedInUserOrdersAsync, selectUserOrders } from "../userSlice";
 import { discountedPrice } from "../../../app/constants";
 
 export default function UserOrders() {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
   const orders = useSelector(selectUserOrders);
   useEffect(() => {
-    dispatch(fetchLoggedInUserOrdersAsync(user.id));
+    dispatch(fetchLoggedInUserOrdersAsync());
   }, []);
   return (
     <div>
       {orders.map((order, index) => (
-        <div key={index} className="mx-auto mt-12 max-w-3xl px-4 sm:px-6 lg:px-8 bg-white">
+        <div
+          key={index}
+          className="mx-auto mt-12 max-w-3xl px-4 sm:px-6 lg:px-8 bg-white"
+        >
           <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               Order #{order.id}
@@ -41,7 +42,9 @@ export default function UserOrders() {
                             <h3>
                               <a href={product.href}>{product.product.title}</a>
                             </h3>
-                            <p className="ml-4">${discountedPrice(product.product)}</p>
+                            <p className="ml-4">
+                              ${discountedPrice(product.product)}
+                            </p>
                           </div>
                         </div>
                         <div className="flex flex-1 items-end justify-between text-sm">

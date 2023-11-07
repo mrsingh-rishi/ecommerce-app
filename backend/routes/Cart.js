@@ -11,7 +11,7 @@ const {
 
 router
   .post("/", addToCart)
-  .get("/:id", fetchCartByUser)
+  .get("/", fetchCartByUser)
   .delete("/:id", deleteFromCart)
   .patch("/:id", updateCart);
 
