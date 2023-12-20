@@ -56,3 +56,12 @@ exports.checkUser = (req, res) => {
     res.sendStatus(404);
   }
 };
+
+exports.logout = async (req, res) => {
+  res
+    .cookie("jwt", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    })
+    .sendStatus(200);
+};

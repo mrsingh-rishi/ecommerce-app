@@ -11,7 +11,7 @@ import UserOrdersPage from "./pages/UserOrdersPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchItemsByUserIdAsync } from "./features/cart/cartSlice";
-import { fetchUserInfoAsync, selectUserInfo } from "./features/auth/authSlice";
+import { checkAuthAsync, selectUserInfo } from "./features/auth/authSlice";
 import PageNorFound from "./pages/404";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import UserProfilePage from "./pages/UserProfilePage";
@@ -22,6 +22,7 @@ import AdminHome from "./pages/AdminHome";
 import AdminProductDetailPage from "./pages/AdminProductDetailPage";
 import AdminProductFormPage from "./pages/AdminProductFormPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
+import StripeCheckout from "./pages/StripeCheckout";
 
 const router = createBrowserRouter([
   {
@@ -133,6 +134,14 @@ const router = createBrowserRouter([
     element: <OrderSuccessPage></OrderSuccessPage>,
   },
   {
+    path: "/stripe-checkout",
+    element: (
+      <ProtectedAdmin>
+        <StripeCheckout></StripeCheckout>
+      </ProtectedAdmin>
+    ),
+  },
+  {
     path: "*",
     element: <PageNorFound></PageNorFound>,
   },
@@ -140,6 +149,9 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(checkAuthAsync());
+  }, []);
   const user = useSelector(selectUserInfo);
   useEffect(() => {
     if (user) {
